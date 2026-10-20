@@ -1,1 +1,11 @@
-{"name":"south-yorkshire-prevention-grants-explorer","version":"1.0.0","private":true,"description":"Static South Yorkshire population targeting explorer","scripts":{"test":"node tests/core.test.js","check":"node --check app.js && node --check core.js"}}
+{
+  "name": "south-yorkshire-prevention-grants-explorer",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Static South Yorkshire population targeting explorer",
+  "scripts": {
+    "test": "node tests/core.test.js",
+    "check": "node --check app.js && node --check core.js && node --check refinements.js",
+    "test:ui": "node tests/dom.test.js && node tests/refinements.test.js"
+  }
+}

@@ -97,3 +97,42 @@ Before wider distribution, run the local server described in README.md and check
 - Official geography has been generalised for web display. Do not use the displayed polygons for property-level decisions.
 - The browser verifies the schema and geography labels of replacement admissions data but cannot prove the quality of a user's local calculation.
 - The downloaded default processed CSV is a baseline snapshot. Use live export after changing thresholds or uploading replacement data.
+
+## Revision 2 checks and results
+
+The published app.js matched the original local application before editing. All six original files (names, population, ethnicity, deprivation, admissions, boundaries) are byte-for-byte unchanged, checked against stored SHA-256 hashes. Every original targeting threshold and default flag is unchanged.
+
+### Revised default cards
+
+| Metric | Expected and verified |
+|---|---:|
+| Matching neighbourhoods / geography denominator | 77 / 171 |
+| All residents in shortlist (mid-2024) | 736,488 |
+| All three original population criteria | 3 |
+| SAR above 100 | 59 |
+| Admissions coverage in shortlist | 76 / 77 |
+| Residents of deprived LSOAs in shortlist | 371,700 |
+| Ethnic minority residents in shortlist | 172,594 |
+| Men aged 40–74 in shortlist | 137,889 |
+
+### Added analytical and UI checks
+
+- Independent Python Decimal recalculation verifies every one of the 171 weighted IMD scores from all 860 source LSOAs. Each result lies between its constituent LSOAs' minimum and maximum scores, and every denominator equals the primary deprivation denominator.
+- Weighted scores range from 2.8174126469 to 68.9540043438. Full-SY population-weighted descriptive benchmark: 29.1100322876.
+- Bubble radius uses `0.32 × sqrt(count)`; squared-radius ratio for 3,000 versus 1,000 residents is exactly 3 within floating-point tolerance. No minimum-radius addition or nonlinear size transformation is applied.
+- DOM checks verify all four revised KPI values, the three population-breakdown sums, geography denominators and the collapsed advanced setting.
+- Axis switching preserves all flags/KPIs. Percentage-axis line is the unchanged deprivation cutoff; score-axis line is the descriptive weighted mean. Four labels and the correct upper-right interpretation are present in both modes.
+- Admissions map colours are continuous with 100 at the midpoint, 200+ explicitly capped, and null distinct from zero. The merged area's active polygon uses a hatch pattern.
+- Highlight mode preserves the shortlist and counts; restrict mode uses strict `SAR > threshold`, excludes missing SARs and synchronises table, chart and KPI counts.
+- Changing the analyst targeting percentage updates the plain-English analytical-percent note without changing the national deprived-20% definition.
+- All-three KPI retains its meaning when only men aged 40–74 is selected.
+- Replacement admissions data refreshes KPI, map, filter and period labels; restoring bundled data restores exact defaults. Previous validation/rejection/rollback checks continue to pass.
+- Exported CSV is read back from its generated Blob and checked for current rows, IMD score, admissions period and health-filter provenance.
+
+Executed tests are recorded in `tests/core-results.txt`, `tests/dom-results.txt`, `tests/refinements-results.txt` and `tests/weighted-imd-results.txt`.
+
+### Responsive implementation and verification limit
+
+CSS provides a two-column desktop sidebar/content layout, four KPI cards, a two-column map/quadrant on wide desktops, stacked visualisations below 1280px, stacked filters below 1000px and two-column KPI cards below 650px. Table overflow is scrollable. Narrow-screen quadrants preserve readable geometry using horizontal scrolling at a minimum 520px plotting width; labels occupy reserved bands outside the bubbles. Chart geometry is recalculated when the viewport changes or a tab opens.
+
+Structure, breakpoints and handler wiring were inspected. **No actual browser rendering, screenshot, pointer-geometry or responsive-device pass is claimed.** The supported browser-preview tool remains unavailable. Complete the browser acceptance checklist above on the intended devices before wider distribution; also check both map layers, axis selectors and health-filter modes.

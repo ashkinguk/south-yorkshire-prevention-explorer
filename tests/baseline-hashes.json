@@ -1,0 +1,8 @@
+{
+  "data/msoa_admissions.csv": "b27cf5306a2dad5333d6bed29a8906f1f896f0fecab0c275b0cfa6c1d339dfa3",
+  "data/msoa_boundaries.geojson": "01e6f4856dde502089f98a34e8f05c4e4a108a662c6543f6dcefb6016418f781",
+  "data/msoa_population.csv": "f2228a905f1d43aa5523d694903d33ec112489b34ef7b3f08c40a4d70adb7c68",
+  "data/msoa_deprivation.csv": "b42b68688080314f631a6f1bc5b5c390abe0c584fb35339a06ba55d46fcedac8",
+  "data/msoa_ethnicity.csv": "04aeec6a1ac1fd92b123dbbf6fd25429fbbde080e4f0016ebe1cd1cbceb71afb",
+  "data/msoa_names.csv": "bf57a27db01fe5bcb6567547d7efd8fa14be08cdf2f511a8535f0f9a562d0a8a"
+}

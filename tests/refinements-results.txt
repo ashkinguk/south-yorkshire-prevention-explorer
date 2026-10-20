@@ -1,0 +1,7 @@
+PASS default totals, proportional bubble areas and anchored continuous admissions colours
+PASS four KPI definitions, coverage denominator, breakdown and collapsed advanced control
+PASS axis switching preserves flags; distinct benchmark, labels and threshold lines
+PASS admissions map missing values, highlight-only and threshold restrictions
+PASS geography denominators, dynamic explanatory note and original-three overlap meaning
+PASS replacement admissions refreshes KPI, map, filter and reference period; restoration
+PASS exported values and supplementary/filter provenance

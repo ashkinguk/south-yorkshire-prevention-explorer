@@ -46,13 +46,16 @@ write('msoa_ethnicity.csv',ethnicity)
 lookup=json.loads((RAW/'lookup.json').read_text());assert not lookup.get('exceededTransferLimit')
 ls=unique([r['attributes'] for r in lookup['features']],'LSOA21CD');assert {r['MSOA21CD'] for r in ls.values()}==codes
 imd=unique(read('imd.csv'),'LSOA code (2021)');expected={c for c,r in imd.items() if r['Local Authority District name (2024)'] in PLACES};assert set(ls)==expected
-agg=collections.defaultdict(lambda:[0,0,0]);audit=[]
+agg=collections.defaultdict(lambda:[0,0,0,0]);audit=[]
 for code,l in ls.items():
  r=imd[code];pop=int(r['Total population: mid 2022']);dec=int(r['Index of Multiple Deprivation (IMD) Decile (where 1 is most deprived 10% of LSOAs)']);assert 1<=dec<=10 and pop>0
- a=agg[l['MSOA21CD']];a[0]+=pop;a[1]+=pop if dec<=2 else 0;a[2]+=1
- audit.append(dict(LSOA21CD=code,MSOA21CD=l['MSOA21CD'],place=l['LAD22NM'],imd_decile=dec,population_mid2022=pop,deprived=int(dec<=2)))
+ a=agg[l['MSOA21CD']];a[0]+=pop;a[1]+=pop if dec<=2 else 0;a[2]+=1;a[3]+=float(r['Index of Multiple Deprivation (IMD) Score'])*pop
+ audit.append(dict(LSOA21CD=code,MSOA21CD=l['MSOA21CD'],place=l['LAD22NM'],imd_decile=dec,population_mid2022=pop,deprived=int(dec<=2),imd_score=float(r['Index of Multiple Deprivation (IMD) Score'])))
 deprivation=[dict(MSOA21CD=c,deprivation_population=a[1],deprivation_denominator=a[0],deprivation_pct=100*a[1]/a[0],lsoa_count=a[2],deprivation_period='IMD 2025; denominator mid-2022') for c,a in sorted(agg.items())]
 write('msoa_deprivation.csv',deprivation);write('lsoa_deprivation_audit.csv',audit)
+scores=[dict(MSOA21CD=c,imd_weighted_score=a[3]/a[0],imd_weight_population=a[0],imd_score_period='IMD 2025; weights mid-2022') for c,a in sorted(agg.items())]
+assert all(0<=r['imd_weighted_score']<=100 for r in scores)
+write('msoa_imd_scores.csv',scores)
 b=json.loads((RAW/'boundaries.geojson').read_text());bc=[r['properties']['MSOA21CD'] for r in b['features']];assert len(bc)==len(set(bc))==171 and set(bc)==codes
 (OUT/'msoa_boundaries.geojson').write_text(json.dumps(b,separators=(',',':')))
 changes=json.loads((RAW/'change_lookup.json').read_text());assert not changes.get('exceededTransferLimit')
@@ -72,7 +75,7 @@ write('msoa_admissions.csv',admissions)
 write('msoa_geography_correspondence.csv',changes)
 (OUT/'admissions_definition.json').write_text(json.dumps(definition,indent=2))
 joined={c:dict(r) for c,r in bycode.items()}
-for rows in [population,ethnicity,deprivation,admissions]:
+for rows in [population,ethnicity,deprivation,admissions,scores]:
  for r in rows:joined[r['MSOA21CD']].update(r)
 def quantile(v,p):
  v=sorted(v);pos=(len(v)-1)*p;lo=math.floor(pos);hi=math.ceil(pos);return v[lo]+(v[hi]-v[lo])*(pos-lo)
@@ -83,6 +86,8 @@ for r in joined.values():
  for k in ['deprivation_pct','ethnic_minority_pct','non_white_pct','men_40_74_pct']:assert 0<=r[k]<=100
 write('msoa_processed_default.csv',list(joined.values()))
 qa=dict(status='Core checks passed; 170 admissions values mapped; one merged area unavailable; browser QA not available',msoas=len(codes),lsoas=len(ls),places=dict(collections.Counter(r['place'] for r in names)),benchmarks=benchmark,population=sum(r['population_total'] for r in population),men_40_74=sum(r['men_40_74'] for r in population),ethnicity_category_sum_differences=dict(collections.Counter(diffs.values())),default_thresholds=thresholds,default_any=sum(r['matches_any'] for r in joined.values()),default_all=sum(r['matches_all'] for r in joined.values()),core_join_complete=True,boundaries_complete=True,admissions_available=sum(r['admissions_sar']!='' for r in admissions),browser_tested=False)
+shortlist=[r for r in joined.values() if r['matches_any']]
+qa['revision2']={'default_shortlist_population':sum(r['population_total'] for r in shortlist),'default_admissions_above100':sum(r['admissions_sar']!='' and float(r['admissions_sar'])>100 for r in shortlist),'default_admissions_available':sum(r['admissions_sar']!='' for r in shortlist),'default_deprived_population':sum(r['deprivation_population'] for r in shortlist),'default_ethnic_minority':sum(r['ethnic_minority'] for r in shortlist),'default_men_40_74':sum(r['men_40_74'] for r in shortlist),'imd_score_min':min(r['imd_weighted_score'] for r in scores),'imd_score_max':max(r['imd_weighted_score'] for r in scores),'imd_sy_descriptive_benchmark':sum(a[3] for a in agg.values())/sum(a[0] for a in agg.values())}
 (OUT/'qa.json').write_text(json.dumps(qa,indent=2));print(json.dumps(qa,indent=2))
 manifest={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in RAW.iterdir() if p.is_file()}
 (OUT/'raw_checksums.json').write_text(json.dumps(manifest,indent=2))

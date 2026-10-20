@@ -1,6 +1,6 @@
-# South Yorkshire Prevention Grants Explorer
+# South Yorkshire Prevention Grants Explorer — revised dashboard
 
-A static, dependency-free web application with real official data for 171 2021 MSOAs across Barnsley, Doncaster, Rotherham and Sheffield. Prepared 20 October 2026. Nothing has been deployed or uploaded to an external repository.
+A static, dependency-free web application with real official data for 171 2021 MSOAs across Barnsley, Doncaster, Rotherham and Sheffield. Prepared 20 October 2026. This revision has not been deployed or uploaded to an external repository. The existing published site remains unchanged.
 
 ## Start locally
 
@@ -32,7 +32,7 @@ The delivered data pass core QA and automated DOM interaction checks. Actual bro
 
 | Path | Purpose |
 |---|---|
-| index.html / styles.css / app.js | Static user interface |
+| index.html / styles.css / app.js | Static user interface; refinements.js extends existing views |
 | core.js | Shared CSV parsing, thresholds, filters, validation and export logic |
 | methods.html | Source definitions and analytical method shown in the application |
 | data/msoa_names.csv | Master 171-area list with friendly and ONS names |
@@ -40,6 +40,7 @@ The delivered data pass core QA and automated DOM interaction checks. Actual bro
 | data/msoa_ethnicity.csv | Census 2021 ethnicity totals and 19 constituent categories |
 | data/msoa_deprivation.csv | IMD 2025 deprived population and percentage, mid-2022 denominator |
 | data/msoa_admissions.csv | SAR, reference period, source and geography audit fields |
+| data/msoa_imd_scores.csv | Supplementary population-weighted average IMD 2025 score |
 | data/msoa_boundaries.geojson | ONS 2021 web-optimised boundary geometry |
 | data/msoa_processed_default.csv | Delivered snapshot joined at default top-20%, all-three-selected settings |
 | data/lsoa_deprivation_audit.csv | All 860 LSOAs, deciles, denominators and MSOA mappings |
@@ -116,7 +117,7 @@ jsdom tests exercise the page structure and event handlers, not browser renderin
 
 ## Deploy later, when authorised
 
-The website is plain HTML/CSS/JavaScript. No compilation or backend is required. For any static host, copy `index.html`, `styles.css`, `core.js`, `app.js`, `methods.html`, `QA.md` and the complete `data/` folder while preserving their relative paths. The `raw/`, scripts and tests directories are not required by the live website.
+The website is plain HTML/CSS/JavaScript. No compilation or backend is required. For any static host, copy `index.html`, `styles.css`, `core.js`, `app.js`, `refinements.js`, `methods.html`, `QA.md` and the complete `data/` folder while preserving their relative paths. The `raw/`, scripts and tests directories are not required by the live website.
 
 For GitHub Pages, after you choose a repository and authorise publication, place those files at the root of the selected publishing branch, then enable Pages for that branch/root in the repository settings. The app uses relative paths and works under a repository subpath. Check the host's file-size rules and organisational publishing requirements. This project has not created a repository, registered a Site or deployed anything.
 
@@ -129,3 +130,18 @@ Core reference periods differ: population mid-2024; ethnicity Census 2021; depri
 ## Attribution
 
 ONS and OS data © Crown copyright and database right; Open Government Licence as applicable. Commons Library neighbourhood names: Open Parliament Licence. OHID Public health profiles: Crown copyright, accessed 20 October 2026. Original source links and published admissions metadata are retained in the project. No NHS endorsement or official publication status is implied.
+
+## Revision 2 — replacing your GitHub Pages files
+
+Read **GITHUB_UPDATE.md** for the exact replacement list. This ZIP keeps the original folder structure and adds `refinements.js` and `data/msoa_imd_scores.csv`; neither can be omitted. There is still no build step.
+
+The visible percentile control is now inside the collapsed Advanced targeting settings in Data & Methods. The default stays 20%. New controls: map layer, quadrant X-axis, and a separate admissions highlight/restriction filter. The shortlist shows deprivation and ethnicity percentages, the chosen men count/percentage, admissions SAR, and all three original flags plus selected-criteria count. All original datasets, geography joins and targeting thresholds are preserved.
+
+New tests:
+
+```sh
+python tests/weighted_imd_test.py
+node tests/refinements.test.js
+```
+
+The second needs the same development-only jsdom package as the original DOM tests. The independent Python test verifies all 171 score calculations using Decimal arithmetic and checks that the six original source files are unchanged. The baseline hash checks deliberately fail on an intended later data refresh: review and update the baseline only after independently validating the replacement release.

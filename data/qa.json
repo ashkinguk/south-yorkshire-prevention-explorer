@@ -49,5 +49,16 @@
   "core_join_complete": true,
   "boundaries_complete": true,
   "admissions_available": 170,
-  "browser_tested": false
+  "browser_tested": false,
+  "revision2": {
+    "default_shortlist_population": 736488,
+    "default_admissions_above100": 59,
+    "default_admissions_available": 76,
+    "default_deprived_population": 371700,
+    "default_ethnic_minority": 172594,
+    "default_men_40_74": 137889,
+    "imd_score_min": 2.817412646939603,
+    "imd_score_max": 68.95400434381993,
+    "imd_sy_descriptive_benchmark": 29.110032287552837
+  }
 }

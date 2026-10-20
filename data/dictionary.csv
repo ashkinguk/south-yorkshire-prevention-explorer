@@ -32,6 +32,12 @@ matches / matches_any / matches_all,Current rule result in live export; default 
 target_top_pct / target_rule / selected_criteria,Current filter settings included in live CSV exports,Percent / text
 threshold_deprivation_pct / threshold_ethnic_minority_pct / threshold_men_40_74,Full-SY numeric cutoffs used by the live export,% / % / people
 LSOA21CD / imd_decile / population_mid2022 / deprived,"LSOA audit key, national decile, denominator and deciles-1–2 flag",2021 code / 1–10 / people / 0 or 1
+imd_weighted_score,"Sum of LSOA IMD 2025 scores multiplied by supplied populations, divided by summed weights; supplementary descriptive measure only","IMD score, not percent; weights mid-2022"
+imd_weight_population,Sum of the supplied mid-2022 LSOA population weights,People; mid-2022
+imd_score_period,Supplementary score release and weight reference period,Text
+imd_score,Official LSOA IMD 2025 score retained in the LSOA audit file,IMD score
+health_filter_mode / health_filter_threshold,Optional off/highlight/restrict mode and strict SAR threshold; never a population targeting flag,Text / SAR
+chart_x_axis / imd_descriptive_benchmark,Selected quadrant X-axis and South Yorkshire weighted-mean IMD reference; descriptive only,Text / IMD score
 ethnic_group_1,"White: English, Welsh, Scottish, Northern Irish or British",People; Census 2021
 ethnic_group_2,White: Irish,People; Census 2021
 ethnic_group_3,White: Gypsy or Irish Traveller,People; Census 2021
