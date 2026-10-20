@@ -145,3 +145,17 @@ node tests/refinements.test.js
 ```
 
 The second needs the same development-only jsdom package as the original DOM tests. The independent Python test verifies all 171 score calculations using Decimal arithmetic and checks that the six original source files are unchanged. The baseline hash checks deliberately fail on an intended later data refresh: review and update the baseline only after independently validating the replacement release.
+
+## Revision 2.1 — terminology and chart default
+
+The default now uses **highest South Yorkshire quintile** terminology (approximately 20%, with ties) and MSOA geography wording. Advanced percentages remain available and are described dynamically. Both chart pages and Reset use the **population-weighted average IMD 2025 score** by default; switching to the deprivation concentration percentage remains available and changes no targeting flags.
+
+The horizontal line is the actual ethnicity targeting cutoff (24.505661652864628% at default settings); the default vertical line is the descriptive full-SY population-weighted mean IMD score (29.110032287552837). These are different types of comparison. The upper-right score quadrant does not imply that two original targeting criteria are necessarily met.
+
+See GITHUB_UPDATE.md for the four required live-file replacements for this focused revision. All data, processing scripts, core.js and styles.css are unchanged. Run the added DOM regression test with:
+
+```sh
+node tests/terminology.test.js
+```
+
+This requires the same optional jsdom development dependency as the other DOM tests. Actual browser visual testing remains unavailable.

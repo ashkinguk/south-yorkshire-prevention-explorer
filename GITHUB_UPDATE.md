@@ -1,53 +1,36 @@
-# Replace files in the existing GitHub Pages project
+# GitHub Pages update — version 2.1
 
-This revised project is prepared for your existing site:
-https://ashkinguk.github.io/south-yorkshire-prevention-explorer/
+This is a focused update to the existing polished dashboard. Nothing has been published or changed in your repository.
 
-**No repository changes or publication have been made.** The published app.js was read and matched the first-build project exactly before editing.
+## Replace these four live files
 
-## Recommended: replace the complete project contents
+Extract the ZIP, open its `south-yorkshire-explorer` folder, and replace the matching files at the same level as the current index.html in your GitHub repository:
 
-1. Download and extract the replacement ZIP.
-2. Open its `south-yorkshire-explorer` folder.
-3. Back up any local admissions CSV you have independently updated.
-4. In your existing GitHub repository, replace the matching files with the contents of this folder. Put `index.html` at the **same level as the existing index.html**. Do not upload the ZIP itself, and do not nest a second `south-yorkshire-explorer` folder inside the repository root.
-5. Commit when you are ready to publish. Keep your existing Pages branch/folder setting; there is no build or hosting-configuration change.
-6. After Pages finishes, refresh the site with Ctrl+F5. Check that the sidebar appears, the percentile setting is in Data & Methods, and both map layers and quadrant axes work.
+1. **index.html** — MSOA wording, revised axis selector labels and default selection.
+2. **app.js** — consistent area wording, including Area Explorer and the displayed data dictionary.
+3. **refinements.js** — dynamic quintile/custom-percentage explanations, weighted-IMD default, clearer quadrant labels and benchmark tooltips.
+4. **methods.html** — updated Data & Methods explanations.
 
-## Minimum live-site replacements
+Replace all four together. **Do not upload the ZIP itself or nest an extra project folder.** Keep the existing GitHub Pages publishing branch/folder setting. There is no build step.
 
-| Action | Path |
-|---|---|
-| Replace | index.html |
-| Replace | styles.css |
-| Replace | core.js |
-| Replace | app.js |
-| **Add — required** | **refinements.js** |
-| Replace | methods.html |
-| **Add — required** | **data/msoa_imd_scores.csv** |
-| Replace | data/dictionary.csv |
-| Replace | data/lsoa_deprivation_audit.csv (now includes LSOA IMD scores) |
-| Replace | data/msoa_processed_default.csv (now includes supplementary IMD fields) |
-| Replace | QA.md, README.md |
-| Add | CHANGELOG.md, GITHUB_UPDATE.md |
+## Documentation and development files
 
-Keep the remaining `data/` files: they are still required and were verified unchanged. The ZIP contains them all, so replacing the complete `data/` folder is also safe **unless you have your own newer admissions data**, which you should retain after validating its schema. The browser automatically uses replacement admissions source/periods for the KPI, map, tooltips, shortlist and filters.
+Also replace README.md, QA.md, CHANGELOG.md, GITHUB_UPDATE.md, package.json, tests/refinements.test.js and the supplied test logs. Add tests/terminology.test.js and tests/terminology-results.txt.
 
-## Keep the reproducible source project updated too
+No replacement of data/, scripts/, core.js or styles.css is required: all were verified byte-for-byte unchanged. The complete ZIP includes these files for convenience. If you have installed your own newer admissions CSV, keep it; these interface changes do not require reverting to the bundled snapshot.
 
-Replace `scripts/prepare.py`, `scripts/dictionary.py`, `package.json`, `tests/dom.test.js` and the test-result logs. Add `tests/weighted_imd_test.py`, `tests/refinements.test.js` and `tests/baseline-hashes.json`. Keep the acquisition scripts, raw official responses, other original tests, dependency information and Windows launcher. The ZIP includes the complete set.
+## After committing your update
 
-A local admissions replacement does not require a rebuild. Do not rerun `prepare.py` after installing a local admissions replacement you wish to retain: that script intentionally regenerates the bundled official snapshot.
+Wait for GitHub Pages to finish, then refresh with Ctrl+F5. Verify:
 
-## Acceptance check after replacement
+- Cards use “MSOAs meeting targeting criteria”, “Residents in selected MSOAs” and “MSOAs meeting all three criteria”.
+- The explanation describes the highest South Yorkshire quintile by default.
+- Both quadrant pages initially show the population-weighted average IMD 2025 score.
+- The horizontal ethnicity line shows **24.51%**, with its full cutoff and calculation available through the information tooltip.
+- The vertical average-score line shows **29.11**, explicitly described as a supplementary descriptive benchmark.
+- Switching to the concentration percentage shows its original **72.82%** cutoff and leaves targeting flags unchanged.
+- Advanced 10% or 30% settings update explanations to the custom percentage, and Reset restores 20% and the average-score axis.
 
-With all defaults and South Yorkshire selected, the four cards should show:
+With the bundled snapshot and default filters, totals remain **77 of 171 MSOAs**, **736,488 residents**, **3 MSOAs meeting all three criteria**, and **59 with SAR >100**, with admissions coverage **76 of 77**. Your own admissions replacement may change the admissions figures.
 
-- **77 of 171** neighbourhoods.
-- **736,488** residents.
-- **3** neighbourhoods meeting all three original criteria.
-- **59** areas with SAR above 100, with admissions data available for **76 of 77** shortlisted areas.
-
-The secondary row should show **371,700**, **172,594** and **137,889**, respectively. These are separate, overlapping populations with different reference periods.
-
-These expected figures apply to the bundled snapshot, not necessarily to a newer local admissions replacement or changed advanced settings. A full visual browser check remains necessary: this development session supported automated data and DOM tests, but not browser rendering.
+Automated analytical and DOM interaction tests passed. Actual browser visual testing was unavailable; check the page in your intended browser after replacement.

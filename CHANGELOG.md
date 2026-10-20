@@ -1,5 +1,15 @@
 # Change log
 
+## 2.1.0 — focused terminology and quadrant refinement
+
+- Replaced interface geography references with MSOA/area terminology while retaining Commons Library friendly names and ONS codes.
+- Explained the default as the highest South Yorkshire quintile (Q5, highest values), with separate rankings, approximate 20% coverage and ties. Custom advanced percentages use accurate percentage wording instead.
+- Set the population-weighted average IMD score as the default on both charts and on reset. Preserved the concentration-percentage alternative.
+- Clarified four quadrant labels and added accessible information tooltips showing the meaning and values of the ethnicity targeting cutoff and descriptive IMD benchmark.
+- Updated Data & Methods to distinguish national LSOA deprivation quintiles from South Yorkshire MSOA targeting quintiles.
+- Verified every data file, processing script, core calculation file and CSS file remains byte-for-byte unchanged. Existing and focused interaction checks pass.
+
+
 ## 2.0.0 — 20 October 2026
 
 - Applied the supplied mock-up's visual direction: desktop sidebar, navy/blue/teal palette, spacious cards, icons, larger KPI figures, restrained borders and shadows. No official NHS logo or endorsement claim added.

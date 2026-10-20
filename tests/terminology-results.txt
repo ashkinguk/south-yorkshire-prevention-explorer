@@ -1,0 +1,3 @@
+PASS consistent MSOA terminology, weighted-score defaults on both pages and precise benchmark semantics
+PASS custom-percentage notes/tooltips, moving horizontal cutoff, fixed descriptive vertical benchmark and reset
+PASS original default flags preserved across both axes and Place filters; no application errors

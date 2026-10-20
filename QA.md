@@ -136,3 +136,17 @@ Executed tests are recorded in `tests/core-results.txt`, `tests/dom-results.txt`
 CSS provides a two-column desktop sidebar/content layout, four KPI cards, a two-column map/quadrant on wide desktops, stacked visualisations below 1280px, stacked filters below 1000px and two-column KPI cards below 650px. Table overflow is scrollable. Narrow-screen quadrants preserve readable geometry using horizontal scrolling at a minimum 520px plotting width; labels occupy reserved bands outside the bubbles. Chart geometry is recalculated when the viewport changes or a tab opens.
 
 Structure, breakpoints and handler wiring were inspected. **No actual browser rendering, screenshot, pointer-geometry or responsive-device pass is claimed.** The supported browser-preview tool remains unavailable. Complete the browser acceptance checklist above on the intended devices before wider distribution; also check both map layers, axis selectors and health-filter modes.
+
+## Revision 2.1 — focused refinement verification
+
+The published refinements.js matched the local v2 source before editing. A SHA-256 comparison verified that **all data files, every acquisition/processing script, core.js and styles.css are byte-for-byte unchanged** after this revision. The same 171 MSOAs, all default thresholds, all default flags and KPI totals are preserved.
+
+The original 11 core test groups and existing DOM/refinement interaction tests passed after updating text expectations only. Three new DOM test groups in tests/terminology.test.js verify:
+
+- Consistent MSOA terminology in rendered content, all three requested KPI titles, weighted-score defaults on both chart pages, accurate quadrant labels and actual reference values.
+- Default highest-quintile descriptions and tooltips; accurate custom 10%/30% descriptions without mislabelling the custom selection as the highest quintile; changing ethnicity targeting cutoffs; fixed IMD descriptive benchmark; reset returning to 20% and the score axis.
+- Exact equality of every default population flag when switching axes and Place; correct concentration-axis targeting cutoff; no application errors.
+
+Default horizontal line: 24.505661652864628% ethnicity, the inclusive linearly interpolated 80th-percentile cutoff of all 171 MSOA percentages. Default vertical line: 29.110032287552837, the population-weighted mean IMD score, descriptive only. Percentage-view vertical line: 72.81648675171736%, the unchanged original deprivation targeting cutoff. The average-score chart never uses that percentage as an X reference.
+
+No CSS or layout changes were made. Both chart pages use the same updated rendering and descriptions. Visual browser/responsive-device testing remains unavailable; no screenshot or browser-rendering pass is claimed. The existing manual acceptance checklist still applies.
