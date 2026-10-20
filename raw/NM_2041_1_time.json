@@ -1,0 +1,7 @@
+{
+
+"structure" :{"codelists" :{"codelist" :[
+{"agencyid" :"NOMIS","id" :"CL_2041_1_TIME","code" :[
+{"annotations" :{"annotation" :[
+{"annotationtext" :"Census date 2021-03-21","annotationtitle" :"MetaDescription"},{"annotationtext" :"2021-03-21","annotationtitle" :"Census date"},{"annotationtext" :"2022-11-29 11:30:00","annotationtitle" :"CurrentRevisionReleased"},{"annotationtext" :"Live","annotationtitle" :"CurrentRevisionStatus"},{"annotationtext" :"Due to a data processing error, some of the values in this dataset were incorrectly labelled. This was corrected as of 11:30am on Tuesday 29 November 2022. This issue only affected the data on the Nomis website.","annotationtitle" :"CurrentRevisionComment"},{"annotationtext" :1,"annotationtitle" :"CurrentRevisionVersion"},{"annotationtext" :1,"annotationtitle" :"MetadataCount"}]},"description" :{"value" :2021,"lang" :"en"},"value" :2021}],"name" :{"value" :"date","lang" :"en"},"uri" :""}]},"header" :{"id" :"NM_2041_1","prepared" :"2026-10-20T21:26:19Z","sender" :{"contact" :{"email" :"census.customerservices@ons.gov.uk","name" :"Census Customer Services","telephone" :"01329 444 972","uri" :"http://www.ons.gov.uk/census"},"id" :"NOMIS"},"test" :"false"},"xmlns" :"http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message","common" :"http://www.SDMX.org/resources/SDMXML/schemas/v2_0/common","structure" :"http://www.SDMX.org/resources/SDMXML/schemas/v2_0/structure","xsi" :"http://www.w3.org/2001/XMLSchema-instance","schemalocation" :"http://sdmx.org/docs/2_0/SDMXMessage.xsd"}
+}

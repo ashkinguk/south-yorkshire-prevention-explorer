@@ -1,0 +1,53 @@
+{
+  "status": "Core checks passed; 170 admissions values mapped; one merged area unavailable; browser QA not available",
+  "msoas": 171,
+  "lsoas": 860,
+  "places": {
+    "Barnsley": 30,
+    "Doncaster": 39,
+    "Rotherham": 32,
+    "Sheffield": 70
+  },
+  "benchmarks": [
+    {
+      "place": "Barnsley",
+      "sum_msoa": 251770,
+      "published_lad": 251770,
+      "difference": 0
+    },
+    {
+      "place": "Doncaster",
+      "sum_msoa": 319765,
+      "published_lad": 319765,
+      "difference": 0
+    },
+    {
+      "place": "Rotherham",
+      "sum_msoa": 276595,
+      "published_lad": 276595,
+      "difference": 0
+    },
+    {
+      "place": "Sheffield",
+      "sum_msoa": 582493,
+      "published_lad": 582493,
+      "difference": 0
+    }
+  ],
+  "population": 1430623,
+  "men_40_74": 282531,
+  "ethnicity_category_sum_differences": {
+    "0": 171
+  },
+  "default_thresholds": {
+    "deprivation_pct": 72.81648675171736,
+    "ethnic_minority_pct": 24.505661652864628,
+    "men_40_74": 1971.0
+  },
+  "default_any": 77,
+  "default_all": 3,
+  "core_join_complete": true,
+  "boundaries_complete": true,
+  "admissions_available": 170,
+  "browser_tested": false
+}

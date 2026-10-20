@@ -1,0 +1,53 @@
+field,definition,unit_period
+MSOA21CD,Principal join key; 2021 Middle Layer Super Output Area code,Text; 2021 boundaries
+MSOA21NM,Standard ONS statistical name,Text
+name,House of Commons Library neighbourhood name,v2.3; February 2026
+place,"Barnsley, Doncaster, Rotherham or Sheffield",Text
+boundary_status,Commons names dataset change label,Text
+population_total,All residents; all ages and sexes,People; mid-2024
+men_40_74,"Sum of male single-age estimates, ages 40 through 74 inclusive",People; mid-2024
+men_40_74_pct,100 × men_40_74 / population_total,%; mid-2024
+population_period,Population estimate reference period,Text
+census_total,TS021 total usual residents,People; Census 2021
+ethnic_minority,census_total minus White British category 1,People; Census 2021
+ethnic_minority_pct,100 × ethnic_minority / census_total,%; Census 2021
+non_white,census_total minus the five White categories 1–5,People; Census 2021
+non_white_pct,100 × non_white / census_total,%; Census 2021
+ethnicity_period,Census reference period,Text
+deprivation_population,Sum of File 7 mid-2022 populations in national deciles 1–2,People; IMD 2025 / mid-2022
+deprivation_denominator,Sum of all corresponding File 7 LSOA populations,People; mid-2022
+deprivation_pct,100 × deprivation_population / deprivation_denominator,%; IMD 2025
+lsoa_count,Number of 2021 LSOAs within the MSOA,Count
+deprivation_period,IMD release and denominator period,Text
+admissions_sar,Published indirectly age-standardised emergency all-cause admissions ratio; blank means unavailable,England=100; 2016/17–2020/21
+period / source / geography,Required admissions provenance; geography must equal MSOA2021 after harmonisation,Text
+status,"Unchanged boundary, merged/unavailable, or replacement data status",Text
+lower_ci_95 / upper_ci_95,Published 95% confidence interval limits for SAR,Ratio; optional on upload
+original_geography / original_codes,Admissions source geography and 2011 predecessor codes,Text; audit
+value_note,Published note or explanation of missing SAR,Text
+flag_deprivation_pct / flag_ethnic_minority_pct / flag_men_40_74,Individual full-South-Yorkshire percentile flags; static processed file uses top 20%,Boolean / 0 or 1
+criteria_met,Number of selected criteria met; static processed file selects all three,0–3
+all_criteria_met,"All three original flags met count, regardless of selected criteria; live export",0–3
+matches / matches_any / matches_all,Current rule result in live export; default ANY/ALL results in processed CSV,Boolean / 0 or 1
+target_top_pct / target_rule / selected_criteria,Current filter settings included in live CSV exports,Percent / text
+threshold_deprivation_pct / threshold_ethnic_minority_pct / threshold_men_40_74,Full-SY numeric cutoffs used by the live export,% / % / people
+LSOA21CD / imd_decile / population_mid2022 / deprived,"LSOA audit key, national decile, denominator and deciles-1–2 flag",2021 code / 1–10 / people / 0 or 1
+ethnic_group_1,"White: English, Welsh, Scottish, Northern Irish or British",People; Census 2021
+ethnic_group_2,White: Irish,People; Census 2021
+ethnic_group_3,White: Gypsy or Irish Traveller,People; Census 2021
+ethnic_group_4,White: Roma,People; Census 2021
+ethnic_group_5,White: Other White,People; Census 2021
+ethnic_group_6,Mixed or Multiple ethnic groups: White and Black Caribbean,People; Census 2021
+ethnic_group_7,Mixed or Multiple ethnic groups: White and Black African,People; Census 2021
+ethnic_group_8,Mixed or Multiple ethnic groups: White and Asian,People; Census 2021
+ethnic_group_9,Mixed or Multiple ethnic groups: Other Mixed or Multiple ethnic groups,People; Census 2021
+ethnic_group_10,"Asian, Asian British or Asian Welsh: Indian",People; Census 2021
+ethnic_group_11,"Asian, Asian British or Asian Welsh: Pakistani",People; Census 2021
+ethnic_group_12,"Asian, Asian British or Asian Welsh: Bangladeshi",People; Census 2021
+ethnic_group_13,"Asian, Asian British or Asian Welsh: Chinese",People; Census 2021
+ethnic_group_14,"Asian, Asian British or Asian Welsh: Other Asian",People; Census 2021
+ethnic_group_15,"Black, Black British, Black Welsh, Caribbean or African: Caribbean",People; Census 2021
+ethnic_group_16,"Black, Black British, Black Welsh, Caribbean or African: African",People; Census 2021
+ethnic_group_17,"Black, Black British, Black Welsh, Caribbean or African: Other Black",People; Census 2021
+ethnic_group_18,Other ethnic group: Arab,People; Census 2021
+ethnic_group_19,Other ethnic group: Any other ethnic group,People; Census 2021

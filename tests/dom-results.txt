@@ -1,0 +1,7 @@
+PASS initial load: 77 matching rows, map shapes, bubbles and KPI
+PASS Place filter synchronises all visuals
+PASS selection, detail and comparison wiring
+PASS focus and CSV download generation
+PASS count view, sorting, navigation and zoom
+PASS temporary upload refresh, missing warning, rejection rollback and restore
+PASS no-selection empty state; no application errors

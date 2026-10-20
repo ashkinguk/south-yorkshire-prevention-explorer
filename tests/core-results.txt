@@ -1,0 +1,12 @@
+PASS 171 unique areas and complete metrics
+PASS default flags agree with independent Python reference for every area
+PASS ties are included and quantile interpolates
+PASS Place filtering retains South Yorkshire thresholds
+PASS all threshold presets, criterion subsets and rules have coherent results
+PASS search by name and code; empty match set handled
+PASS CSV round trip handles quotes, commas, CRLF and Unicode
+PASS CSV text formula protection
+PASS 170 SARs; merged area missing; source values not fabricated
+PASS reject duplicate, unknown, negative, nonnumeric and incompatible geography
+PASS partial uploads warn; zero is distinct from missing; mixed periods rejected
+11 test groups passed
